@@ -101,7 +101,15 @@ class ComposerStaticInit657ac079313fab046eb8c29fe1d6992b
 
     public static $classMap = array (
         'App\\Controllers\\BaseController' => __DIR__ . '/../..' . '/app/Controllers/BaseController.php',
-        'App\\Controllers\\Home' => __DIR__ . '/../..' . '/app/Controllers/Home.php',
+        'App\\Controllers\\Main' => __DIR__ . '/../..' . '/app/Controllers/Main.php',
+        'App\\Models\\Komponent' => __DIR__ . '/../..' . '/app/Models/Komponent.php',
+        'App\\Models\\Nazevparametr' => __DIR__ . '/../..' . '/app/Models/Nazevparametr.php',
+        'App\\Models\\Parametr' => __DIR__ . '/../..' . '/app/Models/Parametr.php',
+        'App\\Models\\Typkomponent' => __DIR__ . '/../..' . '/app/Models/Typkomponent.php',
+        'App\\Models\\Typpocitace' => __DIR__ . '/../..' . '/app/Models/Typpocitace.php',
+        'App\\Models\\Typpocitace_has_komponent' => __DIR__ . '/../..' . '/app/Models/Typpocitace_has_komponent.php',
+        'App\\Models\\Vyber' => __DIR__ . '/../..' . '/app/Models/Vyber.php',
+        'App\\Models\\Vyrobce' => __DIR__ . '/../..' . '/app/Models/Vyrobce.php',
         'CodeIgniter\\API\\ResponseTrait' => __DIR__ . '/..' . '/codeigniter4/framework/system/API/ResponseTrait.php',
         'CodeIgniter\\Autoloader\\Autoloader' => __DIR__ . '/..' . '/codeigniter4/framework/system/Autoloader/Autoloader.php',
         'CodeIgniter\\Autoloader\\FileLocator' => __DIR__ . '/..' . '/codeigniter4/framework/system/Autoloader/FileLocator.php',

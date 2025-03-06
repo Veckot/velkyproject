@@ -6,7 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vyrobci</title>
+    <h1>Seznam komponentu <?php echo $vyrobce->vyrobce ?>:</h1>
+
     <style>
         .card {
             border: 1px solid #ddd;
@@ -35,19 +36,23 @@
 
 <body>
     <div class="container my-5">
-        <h1 class="mb-4">
-            Prehled hovinek
-        </h1>
         <div class="row">
-            <?php foreach ($vyrobce as $v): ?>
+            <?php foreach ($komponent as $k):
+                $imgKomponent = array(
+                    "src" => base_url("MoodleSracky/komponenty/" .$k->pic),
+                    "alt" => "Komponent",
+                    "class" => "img-fluid",
+                    "style" => "width: 95%; height: auto; margin-top: 10px;"
+                ); ?>
                 <div class="col-md-4 col-sm-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
+                            <?= img($imgKomponent);?>
                             <h5 class="card-title">
-                                <?= anchor("komponentyVyrobce/" . $v->idVyrobce, $title = $v->vyrobce); ?>
+                                <?= anchor("komponent/" . $k->id, $k->nazev); ?>
                             </h5>
                             <p class="card-text">
-                                <strong>Id:</strong> <?= esc($v->idVyrobce) ?>
+                                <strong>Typ:</strong> <?= esc($k->typKomponent) ?>
                             </p>
                         </div>
                     </div>
@@ -55,7 +60,6 @@
             <?php endforeach; ?>
         </div>
     </div>
-
 
 
 </body>

@@ -7,3 +7,4 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Main::index');
 $routes->get('komponentyVyrobce/(:num)', 'Main::komponentyVyrobce/$1');
+$routes->get('komponent/(:num)', 'Main::komponent/$1');

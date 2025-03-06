@@ -33,14 +33,38 @@ class Main extends BaseController
         $this->vyber = new Vyber();
         $this->vyrobce = new Vyrobce();
     }
-    public function index(): string
+    public function index()
     {
         $dataMain['vyrobce'] = $this->vyrobce->findAll();
-        return view('main/main', $dataMain);
+        echo view('main/main', $dataMain);
     }
     public function komponentyVyrobce($idVyrobce)
     {
-        $dataKomVyr['komponent'] = $this->komponent->join('vyrobce','komponent.vyrobce_id=vyrobce.idVyrobce','left')->where('vyrobce_id', $idVyrobce)->findAll();
-        return view('main/komponentyVyrobce', $dataKomVyr);
+        $dataKomVyr['vyrobce'] = $this->vyrobce
+            ->find($idVyrobce);
+
+        $dataKomVyr['komponent'] = $this->komponent
+            ->join('vyrobce','komponent.vyrobce_id=vyrobce.idVyrobce','left')
+            ->join('typkomponent','typkomponent.idKomponent=komponent.typKomponent_id','left')
+            ->where('vyrobce_id', $idVyrobce)
+            ->findAll();
+
+        echo view('main/komponentyVyrobce', $dataKomVyr);
+    }
+
+    public function komponent($idKomponent)
+    {
+        $dataKomponent['parametr'] = $this->komponent
+            ->join('parametr','parametr.komponent_id=komponent.id','left')
+            ->join('nazevparametr','parametr.idParametr=nazevparametr.id','left')
+            ->where('komponent.id' , $idKomponent)
+            ->findAll();
+
+        $dataKomponent['komponent'] = $this->komponent
+            ->join('vyrobce','komponent.vyrobce_id=vyrobce.idVyrobce','left')
+            ->join('typkomponent','typkomponent.idKomponent=komponent.typKomponent_id','left')
+            ->find($idKomponent);
+
+        echo view('main/komponent', $dataKomponent);
     }
 }

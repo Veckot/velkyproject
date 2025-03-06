@@ -7,7 +7,15 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Controllers\\BaseController' => $baseDir . '/app/Controllers/BaseController.php',
-    'App\\Controllers\\Home' => $baseDir . '/app/Controllers/Home.php',
+    'App\\Controllers\\Main' => $baseDir . '/app/Controllers/Main.php',
+    'App\\Models\\Komponent' => $baseDir . '/app/Models/Komponent.php',
+    'App\\Models\\Nazevparametr' => $baseDir . '/app/Models/Nazevparametr.php',
+    'App\\Models\\Parametr' => $baseDir . '/app/Models/Parametr.php',
+    'App\\Models\\Typkomponent' => $baseDir . '/app/Models/Typkomponent.php',
+    'App\\Models\\Typpocitace' => $baseDir . '/app/Models/Typpocitace.php',
+    'App\\Models\\Typpocitace_has_komponent' => $baseDir . '/app/Models/Typpocitace_has_komponent.php',
+    'App\\Models\\Vyber' => $baseDir . '/app/Models/Vyber.php',
+    'App\\Models\\Vyrobce' => $baseDir . '/app/Models/Vyrobce.php',
     'CodeIgniter\\API\\ResponseTrait' => $vendorDir . '/codeigniter4/framework/system/API/ResponseTrait.php',
     'CodeIgniter\\Autoloader\\Autoloader' => $vendorDir . '/codeigniter4/framework/system/Autoloader/Autoloader.php',
     'CodeIgniter\\Autoloader\\FileLocator' => $vendorDir . '/codeigniter4/framework/system/Autoloader/FileLocator.php',
