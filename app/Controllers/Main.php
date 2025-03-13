@@ -32,6 +32,7 @@ class Main extends BaseController
         $this->typpocitace= new Typpocitace();
         $this->vyber = new Vyber();
         $this->vyrobce = new Vyrobce();
+        $pager = \Config\Services::pager();
     }
     public function index()
     {
@@ -40,23 +41,43 @@ class Main extends BaseController
     }
     public function komponentyVyrobce($idVyrobce)
     {
-        $dataKomVyr['vyrobce'] = $this->vyrobce
-            ->find($idVyrobce);
-
-        $dataKomVyr['komponent'] = $this->komponent
-            ->join('vyrobce','komponent.vyrobce_id=vyrobce.idVyrobce','left')
-            ->join('typkomponent','typkomponent.idKomponent=komponent.typKomponent_id','left')
+        // Load the pagination library
+        $pager = \Config\Services::pager();
+    
+        // Get the current page number from the query string, default to 1
+        $page = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
+    
+        // Number of items per page
+        $perPage = 6;
+    
+        // Get the total number of items
+        $total = $this->komponent
             ->where('vyrobce_id', $idVyrobce)
-            ->findAll();
-
+            ->countAllResults(false); // false to not reset query
+    
+        // Get the items for the current page
+        $dataKomVyr['komponent'] = $this->komponent
+            ->join('vyrobce', 'komponent.vyrobce_id=vyrobce.idVyrobce', 'left')
+            ->join('typkomponent', 'typkomponent.idKomponent=komponent.typKomponent_id', 'left')
+            ->where('vyrobce_id', $idVyrobce)
+            ->paginate($perPage, 'default', $page);
+    
+        // Pass the pagination links to the view
+        $dataKomVyr['pager'] = $this->komponent->pager;
+    
+        // Get the manufacturer details
+        $dataKomVyr['vyrobce'] = $this->vyrobce->find($idVyrobce);
+    
         echo view('main/komponentyVyrobce', $dataKomVyr);
     }
 
     public function komponent($idKomponent)
     {
+        //pagination
+        
         $dataKomponent['parametr'] = $this->komponent
             ->join('parametr','parametr.komponent_id=komponent.id','left')
-            ->join('nazevparametr','parametr.idParametr=nazevparametr.id','left')
+            ->join('nazevparametr','parametr.nazevParametr_id=nazevparametr.id','left')
             ->where('komponent.id' , $idKomponent)
             ->findAll();
 
