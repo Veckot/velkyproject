@@ -1,8 +1,8 @@
-<?= $this->extend('layout/templateMain'); ?>
+<?= $this->extend('layout/templateKomVyr'); ?>
 <?= $this->section("content"); ?>
 <!DOCTYPE html>
 <html lang="cs">
-
+<?php var_dump($breadcrumps);?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

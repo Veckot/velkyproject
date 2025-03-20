@@ -44,7 +44,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <?= anchor("komponentyVyrobce/" . $v->idVyrobce, $title = $v->vyrobce); ?>
+                                <?= anchor("komponentyVyrobce/" . $v->url, $title = $v->vyrobce); ?>
                             </h5>
                             <p class="card-text">
                                 <strong>Id:</strong> <?= esc($v->idVyrobce) ?>

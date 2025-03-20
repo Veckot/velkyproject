@@ -11,6 +11,7 @@ use App\Models\Typpocitace_has_komponent;
 use App\Models\Typpocitace;
 use App\Models\Vyber;
 use App\Models\Vyrobce;
+use Config\MyConfig;
 
 class Main extends BaseController
 {
@@ -22,6 +23,8 @@ class Main extends BaseController
     private $typpocitace;
     private $vyber;
     private $vyrobce;
+    private $config;
+    private $breadcrumps1;
     public function __construct()
     {
         $this->komponent= new Komponent();
@@ -33,39 +36,33 @@ class Main extends BaseController
         $this->vyber = new Vyber();
         $this->vyrobce = new Vyrobce();
         $pager = \Config\Services::pager();
+        $this->config = new MyConfig();
     }
     public function index()
     {
         $dataMain['vyrobce'] = $this->vyrobce->findAll();
         echo view('main/main', $dataMain);
     }
-    public function komponentyVyrobce($idVyrobce)
+    public function komponentyVyrobce($urlVyrobce)
     {
-        // Load the pagination library
+        $this->breadcrumps1 = $urlVyrobce;
         $pager = \Config\Services::pager();
-    
-        // Get the current page number from the query string, default to 1
-        $page = $this->request->getVar('page') ? $this->request->getVar('page') : 1;
-    
-        // Number of items per page
-        $perPage = 6;
-    
-        // Get the total number of items
-        $total = $this->komponent
-            ->where('vyrobce_id', $idVyrobce)
-            ->countAllResults(false); // false to not reset query
-    
-        // Get the items for the current page
+
+        $dataKomVyr['breadcrumps'] = $this->breadcrumps1;
+
+        $perPage = $this->config->perPage;
+        $idVyrobce = $this->vyrobce->where('url', $urlVyrobce)->first()->idVyrobce;
+
         $dataKomVyr['komponent'] = $this->komponent
             ->join('vyrobce', 'komponent.vyrobce_id=vyrobce.idVyrobce', 'left')
             ->join('typkomponent', 'typkomponent.idKomponent=komponent.typKomponent_id', 'left')
             ->where('vyrobce_id', $idVyrobce)
-            ->paginate($perPage, 'default', $page);
+            ->paginate($perPage, 'default');
     
-        // Pass the pagination links to the view
+
         $dataKomVyr['pager'] = $this->komponent->pager;
     
-        // Get the manufacturer details
+
         $dataKomVyr['vyrobce'] = $this->vyrobce->find($idVyrobce);
     
         echo view('main/komponentyVyrobce', $dataKomVyr);
@@ -73,7 +70,7 @@ class Main extends BaseController
 
     public function komponent($idKomponent)
     {
-        //pagination
+
         
         $dataKomponent['parametr'] = $this->komponent
             ->join('parametr','parametr.komponent_id=komponent.id','left')
