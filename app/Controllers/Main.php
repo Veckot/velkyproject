@@ -70,19 +70,33 @@ class Main extends BaseController
 
     public function komponent($idKomponent)
     {
-
         
+        $dataKomponent['breadcrumpsKom'] = $this->breadcrumps1;
         $dataKomponent['parametr'] = $this->komponent
             ->join('parametr','parametr.komponent_id=komponent.id','left')
             ->join('nazevparametr','parametr.nazevParametr_id=nazevparametr.id','left')
             ->where('komponent.id' , $idKomponent)
             ->findAll();
-
+        $dataKomponent['vyrobce'] = $this->komponent
+            ->join('vyrobce','komponent.vyrobce_id=vyrobce.idVyrobce','left')
+            ->find($idKomponent);
+            
         $dataKomponent['komponent'] = $this->komponent
             ->join('vyrobce','komponent.vyrobce_id=vyrobce.idVyrobce','left')
             ->join('typkomponent','typkomponent.idKomponent=komponent.typKomponent_id','left')
             ->find($idKomponent);
 
         echo view('main/komponent', $dataKomponent);
+    }
+
+    public function tabs()
+    {
+        $dataTabs['komponent'] = $this->komponent
+            ->join('vyrobce', 'komponent.vyrobce_id=vyrobce.idVyrobce', 'left')
+            ->join('typkomponent', 'typkomponent.idKomponent=komponent.typKomponent_id', 'left')
+            ->findAll();
+    
+        $dataTabs['typkomponent'] = $this->typkomponent->findAll();
+        echo view('main/tabs', $dataTabs);
     }
 }

@@ -3,10 +3,11 @@
         <!-- Brand Name -->
         <a class="navbar-brand fw-bold text-primary" href="<?= base_url() ?>">BigAssProject228</a>
 
-        <nav aria-label="breadcrumb" class="bg-light py-2 px-3 rounded shadow-sm">
+        <nav aria-label="breadcrumb" class="bg-light rounded shadow-sm">
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="<?= base_url() ?>">Home</a></li>
-                <li class="breadcrumb-item"><?= anchor("komponentyVyrobce/" . $breadcrumps, $title = $vyrobce->vyrobce); ?></li>
+                <li class="breadcrumb-item"><?= anchor("komponentyVyrobce/" . $vyrobce->vyrobce, $title = $vyrobce->vyrobce); ?></li>
+                <li class="breadcrumb-item"><?= anchor("komponent/" . $vyrobce->id, $title = $vyrobce->nazev); ?></li>
             </ol>
         </nav>
 
@@ -16,6 +17,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Navbar Items -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">

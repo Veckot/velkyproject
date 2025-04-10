@@ -1,4 +1,4 @@
-<?= $this->extend('layout/templateMain'); ?>
+<?= $this->extend('layout/templateKomponent'); ?>
 <?= $this->section("content"); ?>
 <!DOCTYPE html>
 <html lang="cs">
