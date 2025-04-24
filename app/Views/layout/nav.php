@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <?= anchor("tabs", $title = "Add nigga", ['class' => 'bg-light nav-link text-primary fw-bold']); ?>
+                    <?= anchor("admin", $title = "Add nigga", ['class' => 'bg-light nav-link text-primary fw-bold']); ?>
                 </li>
                 <li class="nav-item">
                     <?= anchor("tabs", $title = "Taby", ['class' => 'nav-link text-primary fw-bold']); ?>

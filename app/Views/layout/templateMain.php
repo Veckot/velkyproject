@@ -8,8 +8,10 @@
 </head>
 <body>
     <?= $this->include("layout/nav");?>
+    <?= $this->include("layout/alert"); ?>
     <div class="container-fluid">
         <?= $this->renderSection("content");?>
+
         <?= $this->include("layout/js");?>
     </div>
 </body>

@@ -99,4 +99,5 @@ class Main extends BaseController
         $dataTabs['typkomponent'] = $this->typkomponent->findAll();
         echo view('main/tabs', $dataTabs);
     }
+
 }
